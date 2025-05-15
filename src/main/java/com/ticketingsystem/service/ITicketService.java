@@ -10,4 +10,6 @@ public interface ITicketService {
     Ticket findTicketByToken(int token);
     List<Ticket> findAllTicket();
     String TicketStatus(int token);
+    boolean AssignedTicket(String tokenId,String userId);
+    Ticket changePriority(String id,String priority);
 }

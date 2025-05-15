@@ -18,6 +18,15 @@ public class TicketController {
        return res.getToken()+"";
     }
 
+    @PostMapping("priority/{tokenId}/{status}")
+    public Ticket changeTicketPriority(@PathVariable String tokenId,@PathVariable String status){
+        return _ticketService.changePriority(tokenId,status);
+    }
+
+    @PostMapping("status/{tokenId}/{status}")
+    public Ticket changeTicketStatus(@PathVariable String tokenId,@PathVariable String status){
+        return null;
+    }
     @GetMapping("/{tokenId}")
     public Ticket findTicketByToken(@PathVariable String tokenId){
        return  _ticketService.findTicketByToken(Integer.parseInt(tokenId));

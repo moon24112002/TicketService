@@ -2,6 +2,7 @@ package com.ticketingsystem.service;
 
 import com.ticketingsystem.entity.Status;
 import com.ticketingsystem.entity.Ticket;
+import com.ticketingsystem.utility.TicketDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Stream;
 
 @Service
 public class TicketService implements ITicketService{
@@ -23,9 +25,7 @@ public class TicketService implements ITicketService{
         ticket.setToken(token);
         ticket.setState(Status.NEW.getDisplayName());
         ticket.setAssignedTo("Not assigned yet");
-
         store.add(ticket);
-
         // mail service
         SimpleMailMessage mail= new SimpleMailMessage();
         mail.setTo(ticket.getEmail());
@@ -58,6 +58,27 @@ public class TicketService implements ITicketService{
         return findTicketByToken(token).getState();
     }
 
+    @Override
+    public boolean AssignedTicket(String tokenId, String userId) {
+
+        store.stream().filter(item->item.getToken()==Integer.parseInt(tokenId)).findFirst().map(item->{
+            item.setAssignedTo(userId);
+            return true;
+        }).orElse(false);
+        return false;
+    }
+
+    @Override
+    public Ticket changePriority(String id, String priority) {
+
+    store.stream().filter(item -> item.getToken() == Integer.parseInt(id)).findFirst().map(ticket->{
+        ticket.setPriority(priority);
+        return ticket;
+    }).orElse(null);
+    return null;
+
+    }
+
 
     //private region
     public String buildTicketMessage(String name, String message,int token){
@@ -74,6 +95,5 @@ public class TicketService implements ITicketService{
                 .append("IT Help Desk");
         return sb.toString();
     }
-
 
 }
