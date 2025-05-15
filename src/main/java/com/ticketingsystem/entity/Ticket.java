@@ -15,5 +15,8 @@ public class Ticket {
     private String name;
     private String email;
     private String message;
+    private String assignedTo;
+    private String priority;
+    private String state;
 
 }

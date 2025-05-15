@@ -9,4 +9,5 @@ public interface ITicketService {
     Ticket findTicketById(String id);
     Ticket findTicketByToken(int token);
     List<Ticket> findAllTicket();
+    String TicketStatus(int token);
 }
