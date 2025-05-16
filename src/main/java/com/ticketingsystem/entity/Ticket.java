@@ -18,5 +18,6 @@ public class Ticket {
     private String assignedTo;
     private String priority;
     private String state;
+    private String category;
 
 }
