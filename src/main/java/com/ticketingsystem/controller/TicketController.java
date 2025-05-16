@@ -13,9 +13,9 @@ public class TicketController {
     ITicketService _ticketService;
 
     @PostMapping()
-    public String createTicket(@RequestBody Ticket ticket){
+    public Ticket createTicket(@RequestBody Ticket ticket){
        var res =  _ticketService.createTicket(ticket);
-       return res.getToken()+"";
+       return res;
     }
 
     @PostMapping("priority/{tokenId}/{status}")
