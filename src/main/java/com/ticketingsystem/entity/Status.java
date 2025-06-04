@@ -5,10 +5,8 @@ public enum Status {
     IN_PROGRESS("In Progress"),
     RESOLVED("Resolved"),
     CLOSED("Closed");
-
     private final String displayName;
     Status(String state) {
-
         this.displayName = state;
     }
     public String getDisplayName() {
